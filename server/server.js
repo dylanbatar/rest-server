@@ -57,6 +57,6 @@ app.put('/usuario/:id/:name', (req, res) =>{
 //   	res.json('peticion get')
 // })  
  
-app.listen(3000,()=> console.log(`escuchando en el puerto ${process.env.port}`))
+app.listen(process.env.port,()=> console.log(`escuchando en el puerto ${process.env.port}`))
 
 // ---------------------------------------------
