@@ -18,6 +18,11 @@ app.use(bodyParser.json())
 
 
 // -------------- express ----------------------
+
+app.get('/',(req,res)=>{ 
+	res.send('en el index')
+})
+
 app.get('/usuario', (req, res) =>{
   res.json('peticion get')
 })
@@ -48,7 +53,7 @@ app.put('/usuario/:id/:name', (req, res) =>{
 })
 
 app.delete('/usuario', (req, res) =>{
-  res.json('peticion get')
+  	res.json('peticion get')
 })  
  
 app.listen(3000,()=> console.log(`escuchando en el puerto ${process.env.port}`))
