@@ -1,62 +1,53 @@
+require('./config/configs');
 
-// requires
-const express = require('express')
-const app = express()
-require('./config/configs')
-const bodyParser = require('body-parser')
+const express = require('express');
+const app = express();
 
-//----------------body parser------------------
+const bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
- 
+
 // parse application/json
 app.use(bodyParser.json())
 
 
-// ---------------------------------------------
+app.get('/usuario', function(req, res) {
+    res.json('get Usuario LOCAL!!!');
+});
 
+app.post('/usuario', function(req, res) {
 
-// -------------- express ----------------------
-
-app.get('/',(req,res)=>{ 
-	res.send('en el index')
-})
-
-app.get('/usuario', (req, res) =>{
-  res.json('peticion get')
-})
-
-app.post('/usuario', (req, res) =>{
-
-    let body = req.body
+    let body = req.body;
 
     if (body.nombre === undefined) {
+
         res.status(400).json({
-            ok:false,
-            nombre:'se necesita el nombre'
-        })
-    }
-    else{
+            ok: false,
+            mensaje: 'El nombre es necesario'
+        });
+
+    } else {
         res.json({
-            persona:body
-        })
+            persona: body
+        });
     }
-})
 
-app.put('/usuario/:id/:name', (req, res) =>{
-    let id = req.params.id
-    let name = req.params.name
+});
+
+app.put('/usuario/:id', function(req, res) {
+
+    let id = req.params.id;
+
     res.json({
-      id,
-      name
-  })
-})
+        id
+    });
+});
 
-// app.delete('/usuario', (req, res) =>{
-//   	res.json('peticion get')
-// })  
- 
-app.listen(process.env.port,()=> console.log(`escuchando en el puerto ${process.env.port}`))
+app.delete('/usuario', function(req, res) {
+    res.json('delete Usuario');
+});
 
-// ---------------------------------------------
+app.listen(process.env.PORT, () => {
+    console.log('Escuchando puerto: ', process.env.PORT);
+});
